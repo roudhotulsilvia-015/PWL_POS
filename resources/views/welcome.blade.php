@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PWL 2024</title>
-</head>
-<body>
-    <h2>Pemrograman Web II 2024</h2>
-    <h3>Selamat Belajar Laravel</h3>
-</body>
-</html>
+@extends('layouts.template')
+
+@section('content')
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Halo, apakabar!!!</h3>
+        <div class="card-tools"></div>
+    </div>
+    <div class="card-body">
+        Selamat datang semua, ini adalah halaman utama dari aplikasi ini.
+    </div>
+</div>
+@endsection
