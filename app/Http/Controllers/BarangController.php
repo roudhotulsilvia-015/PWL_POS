@@ -39,6 +39,11 @@ class BarangController extends Controller
         $barangs = BarangModel::select('barang_id', 'kategori_id', 'barang_nama', 'barang_kode', 'harga_jual', 'harga_beli')
                     ->with('kategori');
 
+        // Filter berdasarkan kategori_id jika ada
+        if ($request->kategori_id) {
+            $barangs->where('kategori_id', $request->kategori_id);
+        }
+
         return DataTables::of($barangs)
             ->addIndexColumn()
             ->addColumn('aksi', function ($barang) {

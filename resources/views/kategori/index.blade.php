@@ -58,7 +58,6 @@
                 "url": "{{ url('kategori/list') }}",
                 "dataType": "json",
                 "type": "POST"
-                }
             },
             columns: [
                 {
