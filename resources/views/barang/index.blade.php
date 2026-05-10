@@ -6,7 +6,7 @@
         <h3 class="card-title">{{ $page->title }}</h3>
         <div class="card-tools">
             <!-- Link diubah ke barang/create -->
-            <a class="btn btn-sm btn-primary mt-1" href="{{ url('barang/create') }}">Tambah</a>
+            <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Import</button>
         </div>
     </div>
     <div class="card-body">
@@ -50,10 +50,25 @@
         </thead>
     </table>
 </div>
+</div>
+
+<!-- Modal untuk AJAX -->
+<div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+
 @endsection
 
 @push('js')
 <script>
+    function modalAction(url) {
+        $.get(url, function(data) {
+            $('#myModal').html(data).modal('show');
+        });
+    }
+
+    function deleteData(url) {
+        modalAction(url);
+    }
+
     $(document).ready(function() {
         var dataBarang = $('#table_barang').DataTable({
             serverSide: true,
