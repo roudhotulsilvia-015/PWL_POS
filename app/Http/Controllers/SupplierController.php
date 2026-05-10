@@ -74,14 +74,12 @@ class SupplierController extends Controller
     {
         $request->validate([
             'supplier_kode'   => 'required|string|min:2|unique:m_supplier,supplier_kode',
-            'supplier_nama'   => 'required|string|max:100',
-            'supplier_alamat' => 'required|string|max:255',
+            'supplier_nama'   => 'required|string|max:100'
         ]);
 
         SupplierModel::create([
             'supplier_kode'   => $request->supplier_kode,
-            'supplier_nama'   => $request->supplier_nama,
-            'supplier_alamat' => $request->supplier_alamat,
+            'supplier_nama'   => $request->supplier_nama
         ]);
 
         return redirect('/supplier')->with('success', 'Data supplier berhasil disimpan');
@@ -140,14 +138,12 @@ class SupplierController extends Controller
     {
         $request->validate([
             'supplier_kode'   => 'required|string|min:2|unique:m_supplier,supplier_kode,' . $id . ',supplier_id',
-            'supplier_nama'   => 'required|string|max:100',
-            'supplier_alamat' => 'required|string|max:255',
+            'supplier_nama'   => 'required|string|max:100'
         ]);
 
         SupplierModel::find($id)->update([
             'supplier_kode'   => $request->supplier_kode,
-            'supplier_nama'   => $request->supplier_nama,
-            'supplier_alamat' => $request->supplier_alamat,
+            'supplier_nama'   => $request->supplier_nama
         ]);
 
         return redirect('/supplier')->with('success', 'Data supplier berhasil diubah');

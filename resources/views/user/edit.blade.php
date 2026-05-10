@@ -7,24 +7,8 @@
         <div class="card-tools"></div>
     </div>
     <div class="card-body">
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
-    <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Nama</th>
-                <th>Level Pengguna</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-    </table>
-</div>
+        @empty($user)
+            <div class="alert alert-danger alert-dismissible">
                 <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
                 Data yang Anda cari tidak ditemukan.
             </div>
@@ -32,7 +16,7 @@
         @else
             <form method="POST" action="{{ url('/user/' . $user->user_id) }}" class="form-horizontal">
                 @csrf
-                {!! method_field('PUT') !!} <!-- tambahkan baris ini untuk proses edit yang butuh method PUT -->
+                {!! method_field('PUT') !!} 
                 
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Level</label>

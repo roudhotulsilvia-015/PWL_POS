@@ -20,17 +20,11 @@ Route::get('/kategori', [KategoriModel::class, 'index']);
 // --- GROUP ROUTE USER ---
 
 // Menampilkan Tabel Data User
-Route::get('/user', [UserController::class, 'index']);
-
-// Fitur Tambah
+Route::get('/user', [UserController::class, 'index']); 
 Route::get('/user/tambah', [UserController::class, 'tambah']);          // Tampilkan Form (Tadi kamu kurang ini)
-Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']); // Proses Simpan (Sesuaikan nama method)
-
-// Fitur Ubah
+Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']); // Proses Simpan (Sesuaikan nama method)  
 Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);        // Tampilkan Form Edit (Tadi kamu pakai PUT, harusnya GET)
-Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']); // Proses Update
-
-// Fitur Hapus
+Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']); // Proses Update (Sesuaikan nama method)
 Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
 Route::get('/',[WelcomeController::class, 'index']);
@@ -39,9 +33,16 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/list', [UserController::class, 'list']);       // menampilkan data user dalam bentuk json untuk datatables
     Route::get('/create', [UserController::class, 'create']);   // menampilkan halaman form tambah user
     Route::post('/', [UserController::class, 'store']);         // menyimpan data user baru
+    Route::get('/create_ajax', [UserController::class, 'create_ajax']); // menampilkan halaman form tambah user dengan modal        
+    Route::post('/ajax', [UserController::class, 'store_ajax']); // menyimpan data user baru dari ajax
+    Route::get('/{id}/show_ajax', [UserController::class, 'show']);       // menampilkan detail user dengan ajax
+    Route::get('/{id}/edit_ajax', [UserController::class, 'edit']);  // menampilkan halaman form edit user dengan ajax
+    Route::post('/{id}/update_ajax', [UserController::class, 'update_ajax']);     // menyimpan perubahan data user dari ajax
     Route::get('/{id}', [UserController::class, 'show']);       // menampilkan detail user
     Route::get('/{id}/edit', [UserController::class, 'edit']);  // menampilkan halaman form edit user
     Route::put('/{id}', [UserController::class, 'update']);     // menyimpan perubahan data user
+    Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
+    Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']); // Untuk hapus data user Ajax
     Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
 });
 
@@ -77,7 +78,7 @@ Route::group(['prefix' => 'supplier'], function () {
     Route::post('/', [SupplierController::class, 'store']);         // menyimpan data supplier baru
     Route::get('/{id}', [SupplierController::class, 'show']);       // menampilkan detail supplier
     Route::get('/{id}/edit', [SupplierController::class, 'edit']);  // menampilkan halaman form edit supplier
-    Route::put('/{id}', [SupplierController         ::class, 'update']);     // menyimpan perubahan data supplier
+    Route::put('/{id}', [SupplierController::class, 'update']);     // menyimpan perubahan data supplier
     Route::delete('/{id}', [SupplierController::class, 'destroy']); // menghapus data supplier
 });     
 
