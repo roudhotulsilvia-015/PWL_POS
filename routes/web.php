@@ -9,9 +9,10 @@ use App\Http\Controllers\WelcomeController;
 use App\Models\KategoriModel;
 use App\Models\LevelModel;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/level', [LevelModel::class, 'index']);
@@ -121,3 +122,13 @@ Route::group(['prefix' => 'barang'], function () {
     Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // Untuk hapus data barang Ajax
     Route::delete('/{id}', [BarangController::class, 'destroy']); // menghapus data barang
 }); 
+Route::pattern('id', '[0-9]+'); // Membatasi parameter id hanya angka
+Route::get('/login', [AuthController::class, 'login'])->name('login'); // Menampilkan form login
+Route::post('/login', [AuthController::class, 'postlogin']); // Proses login
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [WelcomeController::class, 'index']); // Redirect ke welcome setelah login
+    Route::get('/logout', [AuthController::class, 'logout']); // Proses logout
+    Route::get('/dashboard', [WelcomeController::class, 'index']); // Halaman dashboard (sama dengan welcome)
+    // Tambahkan route lain yang membutuhkan autentikasi di sini
+});

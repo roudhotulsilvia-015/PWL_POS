@@ -131,5 +131,17 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <!-- User Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fas fa-user-circle"></i>
+          <span class="ml-2">{{ Auth::user()->nama ?? 'User' }}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a href="{{ url('/logout') }}" class="dropdown-item">
+            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+          </a>
+        </div>
+      </li>
     </ul>
   </nav>
