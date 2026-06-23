@@ -131,4 +131,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']); // Proses logout
     Route::get('/dashboard', [WelcomeController::class, 'index']); // Halaman dashboard (sama dengan welcome)
     // Tambahkan route lain yang membutuhkan autentikasi di sini
+    });
+    // artinya semua route di dalam group ini harus punya role ADM (Administrator)
+Route::middleware(['authorize:ADM'])->group(function () {
+    Route::get('/level', [LevelController::class, 'index']);
+    Route::post('/level/list', [LevelController::class, 'list']); // untuk list json datatables
+    Route::get('/level/create', [LevelController::class, 'create']);
+    Route::post('/level', [LevelController::class, 'store']);
+    Route::get('/level/{id}/edit', [LevelController::class, 'edit']); // untuk tampilkan form edit
+    Route::put('/level/{id}', [LevelController::class, 'update']); // untuk proses update data
+    Route::delete('/level/{id}', [LevelController::class, 'destroy']); // untuk proses hapus data
+
 });

@@ -7,10 +7,17 @@
     <title>Login Pengguna</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+    <style>
+        /* Small tweaks to better match the reference AdminLTE login screenshot */
+        .input-badge{background:#dc3545;color:#fff;border-radius:6px;padding:6px 8px;margin-right:6px;display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+        .icon-box{background:#f1f1f1;padding:6px 8px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center}
+        .login-box .card{border-top:3px solid #007bff}
+        .login-box .card-header .h1{font-weight:700}
+    </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -23,8 +30,9 @@
                 <div class="input-group mb-3">
                     <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                     <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                        <div class="input-group-text p-0" style="display:flex;align-items:center;">
+                            <span class="input-badge"><i class="fas fa-ellipsis-h"></i></span>
+                            <span class="icon-box"><i class="fas fa-envelope"></i></span>
                         </div>
                     </div>
                     <small id="error-username" class="error-text text-danger"></small>
@@ -32,8 +40,9 @@
                 <div class="input-group mb-3">
                     <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                     <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                        <div class="input-group-text p-0" style="display:flex;align-items:center;">
+                            <span class="input-badge"><i class="fas fa-ellipsis-h"></i></span>
+                            <span class="icon-box"><i class="fas fa-lock"></i></span>
                         </div>
                     </div>
                     <small id="error-password" class="error-text text-danger"></small>
@@ -42,7 +51,7 @@
                     <div class="col-8">
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember">
-                            <label for="remember">Remember Me</label>
+                            <label for="remember" class="font-weight-bold">Remember Me</label>
                         </div>
                     </div>
                     <div class="col-4">
@@ -53,12 +62,12 @@
         </div>
         </div>
     </div>
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-validation/additional-methods.min.js') }}"></script>
-<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 
 <script>
     $(document).ready(function() {

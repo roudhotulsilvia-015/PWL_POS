@@ -53,14 +53,7 @@
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
-                data: {
-                    barang_kode: $('#barang_kode').val(),
-                    barang_nama: $('#barang_nama').val(),
-                    kategori_id: $('#kategori_id').val(),
-                    harga_beli: $('#harga_beli').val(),
-                    harga_jual: $('#harga_jual').val(),
-                    _token: $('input[name="_token"]').val()
-                },
+                data: $(this).serialize(),
                 dataType: 'json',
                 success: function(response) {
                     if(response.status) {
@@ -84,7 +77,8 @@
             });
         });
 
-        $('#barang_kode, #barang_nama, #kategori_id, #harga_beli, #harga_jual').on('change', function() {
+        // Scope change handlers to inputs inside the form to avoid colliding with same IDs on the page
+        $('#form-create-barang').find('#barang_kode, #barang_nama, #kategori_id, #harga_beli, #harga_jual').on('change', function() {
             $(this).removeClass('is-invalid');
             $('#error-' + $(this).attr('id')).text('').hide();
         });
