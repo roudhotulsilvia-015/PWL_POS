@@ -41,4 +41,10 @@ public function hasRole($role): bool
 {
     return $this->level->level_kode == $role;
 }
+
+// Mendapatkan Kode Role
+public function getRoleCode(): string
+{
+    return $this->level->level_kode;    
+}
 }

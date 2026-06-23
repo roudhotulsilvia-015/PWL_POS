@@ -143,3 +143,31 @@ Route::middleware(['authorize:ADM'])->group(function () {
     Route::delete('/level/{id}', [LevelController::class, 'destroy']); // untuk proses hapus data
 
 });
+// artinya semua route di dalam group ini harus punya role ADM (Administrator)
+Route::middleware(['authorize:ADM'])->group(function(){
+    Route::get('/barang', [BarangController::class, 'index']);
+    Route::post('/barang/list', [BarangController::class, 'list']);
+    Route::get('/barang/create_ajax', [BarangController::class, 'create_ajax']); // ajax form create
+    Route::post('/barang_ajax', [BarangController::class, 'store_ajax']); // ajax store
+    Route::get('/barang/{id}/edit_ajax', [BarangController::class, 'edit_ajax']); // ajax form edit
+    Route::put('/barang/{id}/update_ajax', [BarangController::class, 'update_ajax']); // ajax update
+    Route::get('/barang/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // ajax form confirm delete
+    Route::delete('/barang/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // ajax delete
+});
+
+
+// artinya semua route di dalam group ini harus punya role MNG (Manager)
+Route::middleware(['authorize:MNG'])->group(function(){
+    Route::get('/barang', [BarangController::class, 'index']);
+    Route::post('/barang/list', [BarangController::class, 'list']);
+    Route::get('/barang/create_ajax', [BarangController::class, 'create_ajax']); // ajax form create
+    Route::post('/barang_ajax', [BarangController::class, 'store_ajax']); // ajax store
+    Route::get('/barang/{id}/edit_ajax', [BarangController::class, 'edit_ajax']); // ajax form edit
+    Route::put('/barang/{id}/update_ajax', [BarangController::class, 'update_ajax']); // ajax update
+    Route::get('/barang/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // ajax form confirm delete
+    Route::delete('/barang/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // ajax delete
+});
+
+// Tambahkan di routes/web.php
+Route::get('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'store']);
