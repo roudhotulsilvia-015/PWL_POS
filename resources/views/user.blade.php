@@ -9,6 +9,7 @@
     <table border="1" cellpadding="2" cellspacing="0">
         <tr>
             <td>ID</td>
+            <td>Foto</td>
             <td>Username</td>
             <td>Nama</td>
             <td>ID Level Pengguna</td>
@@ -19,6 +20,13 @@
         @foreach ($data as $d)
         <tr>
             <td>{{ $d->user_id }}</td>
+            <td>
+                @if(!empty($d->foto))
+                    <img src="{{ url('storage/fotos/'.$d->foto) }}" alt="avatar" style="width:48px;height:48px;object-fit:cover;border-radius:4px;" />
+                @else
+                    -
+                @endif
+            </td>
             <td>{{ $d->username }}</td>
             <td>{{ $d->nama }}</td>
             <td>{{ $d->level_id }}</td>

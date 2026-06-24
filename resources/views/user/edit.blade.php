@@ -14,9 +14,21 @@
             </div>
             <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
         @else
-            <form method="POST" action="{{ url('/user/' . $user->user_id) }}" class="form-horizontal">
-                @csrf
-                {!! method_field('PUT') !!} 
+                <form action="{{ url('/user/' . $user->user_id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    
+    <div class="form-group">
+        <label>Foto Profile</label>
+            @if(!empty($user->foto))
+                <div class="mb-2">
+                    <img src="{{ asset('storage/fotos/' . $user->foto) }}" alt="Foto Profile" style="max-height:120px; max-width:120px; display:block;"/>
+                </div>
+            @endif
+            <input type="file" name="foto" class="form-control" accept="image/*">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Simpan</button>
                 
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Level</label>

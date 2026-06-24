@@ -145,15 +145,35 @@ class UserController extends Controller
             'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
             'nama'     => 'required|string|max:100',
             'password' => 'nullable|min:5',
-            'level_id' => 'required|integer'
+            'level_id' => 'required|integer',
+            'foto'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        UserModel::find($id)->update([
+        $user = UserModel::findOrFail($id);
+
+        $data = [
             'username' => $request->username,
             'nama'     => $request->nama,
-            'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
-            'level_id' => $request->level_id
-        ]);
+            'level_id' => $request->level_id,
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        // Handle foto upload
+        if ($request->hasFile('foto')) {
+            // delete old foto if exists
+            if ($user->foto && file_exists(storage_path('app/public/fotos/' . $user->foto))) {
+                @unlink(storage_path('app/public/fotos/' . $user->foto));
+            }
+            $file = $request->file('foto');
+            $filename = time() . '_' . preg_replace('/[^A-Za-z0-9._-]/', '_', $file->getClientOriginalName());
+            $file->storeAs('public/fotos', $filename);
+            $data['foto'] = $filename;
+        }
+
+        $user->update($data);
 
         return redirect('/user')->with('success', 'Data user berhasil diubah');
     }
@@ -294,4 +314,6 @@ class UserController extends Controller
         }
         return redirect('/');
     }
+
 }
+

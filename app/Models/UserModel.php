@@ -14,7 +14,7 @@ class UserModel extends Authenticatable
     protected $table = 'm_user';
     protected $primaryKey = 'user_id';
 
-    protected $fillable = ['level_id', 'username', 'nama', 'password'];
+    protected $fillable = ['level_id', 'username', 'nama', 'password', 'foto'];
 
     protected $hidden = ['password'];
     protected $casts = [
@@ -46,5 +46,14 @@ public function hasRole($role): bool
 public function getRoleCode(): string
 {
     return $this->level->level_kode;    
+}
+
+// Accessor for full foto URL (storage path)
+public function getFotoUrlAttribute(): ?string
+{
+    if (empty($this->foto)) {
+        return null;
+    }
+    return asset('storage/fotos/' . $this->foto);
 }
 }
