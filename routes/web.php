@@ -105,9 +105,15 @@ Route::group(['prefix' => 'supplier'], function () {
 });     
 
 Route::get('/barang', [BarangController::class, 'index']);
+Route::pattern('id', '[0-9]+'); // Membatasi parameter id hanya angka
 Route::group(['prefix' => 'barang'], function () {
     Route::get('/', [BarangController::class, 'index']);          // menampilkan halaman awal barang
-    Route::post('/list', [BarangController::class, 'list']);       // menampilkan data barang dalam bentuk json untuk datatables
+    // specific named routes first so they are not captured by /{id}
+    Route::match(['get','post'], '/list', [BarangController::class, 'list']);       // menampilkan data barang dalam bentuk json untuk datatables
+    Route::get('/import', [BarangController::class, 'import']); // ajax form upload excel
+    Route::post('/import_ajax', [BarangController::class, 'import_ajax']); // ajax import excel
+    Route::get('/export_excel', [BarangController::class, 'export_excel']); // export barang to excel
+    Route::get('/export_pdf', [BarangController::class, 'export_pdf']); // export barang to pdf
     Route::get('/create', [BarangController::class, 'create']);   // menampilkan halaman form tambah barang
     Route::post('/', [BarangController::class, 'store']);         // menyimpan data barang baru
     Route::get('/create_ajax', [BarangController::class, 'create_ajax']); // menampilkan halaman form tambah barang dengan modal
@@ -121,8 +127,8 @@ Route::group(['prefix' => 'barang'], function () {
     Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete barang Ajax
     Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // Untuk hapus data barang Ajax
     Route::delete('/{id}', [BarangController::class, 'destroy']); // menghapus data barang
+    
 }); 
-Route::pattern('id', '[0-9]+'); // Membatasi parameter id hanya angka
 Route::get('/login', [AuthController::class, 'login'])->name('login'); // Menampilkan form login
 Route::post('/login', [AuthController::class, 'postlogin']); // Proses login
 
